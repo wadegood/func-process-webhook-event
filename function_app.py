@@ -2,7 +2,7 @@ import azure.functions as func
 import logging
 import json
 
-app = func.FunctionApp(http_auth_level=func.AuthLevel.ANONYMOUS)
+app = func.FunctionApp(http_auth_level=func.AuthLevel.FUNCTION)
 
 @app.route(route="func_process_webhook_event", methods=("POST","GET"))
 def func_process_webhook_event(req: func.HttpRequest) -> func.HttpResponse:
