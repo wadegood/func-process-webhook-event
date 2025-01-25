@@ -15,11 +15,13 @@ def func_process_webhook_event(req: func.HttpRequest) -> func.HttpResponse:
     
     if req.method == 'GET':
         hub_challenge = req.params.get('hub.challenge')
-    
+
         if hub_challenge:
+            logging.info('Validation Successful. Strava subscription is now active.')
             return func.HttpResponse(json.dumps({"hub.challenge":hub_challenge}),
             status_code=200)
-        else: 
+        else:
+            logging.info('Validation failed. Unable to setup Strava subscription')
             return func.HttpResponse("Validation Failed. Please try again.",status_code=401)
     
     else:

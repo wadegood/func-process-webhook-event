@@ -51,11 +51,11 @@ callback_url = 'https://func-process-webhook-event.azurewebsites.net/api/func_pr
 verify_token = '1234'
 
 
-# result = myStrava.create_subscription(callback_url,verify_token)
-# print(result)
-
-result = myStrava.view_subscriptions()
+result = myStrava.create_subscription(callback_url,verify_token)
 print(result)
 
-# result = myStrava.delete_subscription(272386)
+# result = myStrava.view_subscriptions()
+# print(result)
+
+# result = myStrava.delete_subscription(272432)
 # print(result)
