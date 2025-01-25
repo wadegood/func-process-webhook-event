@@ -44,8 +44,15 @@ class Strava:
         response = requests.post(url=url,params=params)
         return response.content
 
-   
+
 myStrava = Strava()
+
+callback_url = 'https://func-process-webhook-event.azurewebsites.net/api/func_process_webhook_event'
+verify_token = '1234'
+
+
+# result = myStrava.create_subscription(callback_url,verify_token)
+# print(result)
 
 result = myStrava.view_subscriptions()
 print(result)
