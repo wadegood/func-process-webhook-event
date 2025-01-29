@@ -12,19 +12,34 @@ Prerequisites
 3. GIT
 4. Azure subscription
 
-Setup Instructions
-1. Clone the repository to your local machine. Open the repository in VSCode and select "reopen in container". This will create a docker container using the image definition found inside of the .devcontainer directory.
 
-2. Create a local.settings.json file. The contents of this file should be as shown below. 
+Environment Setup
+1. Clone the repository to your local machine. Open the repository in VSCode and select "reopen in container". This will create a docker container using the image definition found inside of the .devcontainer directory.
+2. Once the container is setup, select the option to create a virtual environment within the container environment.
+
+Configuring Azure Resources
+1. Login to Azure using the CLI
+  az login
+2. Within the terminal, change your directory to config_files
+  cd config_files
+
+3. Run the following command to make the azure_resources.sh script executable.
+  chmod +x azure_resources.sh
+
+4. Run the script
+  ./azure_resources.sh
+
+
+2. Create a local.settings.json file. The contents of this file should be as shown below. Note you must add an "&" symbol after the strava callback URL value. This is because the azure function URL already contains a parameter appended to the end.
 
 {
     "IsEncrypted": false,
     "Values": {
       "AzureWebJobsStorage": "",
       "FUNCTIONS_WORKER_RUNTIME": "python",
-      "STRAVA_CLIENT_ID": {YOUR_STRAVA_CLIENT_ID},
+      "STRAVA_CLIENT_ID": "{YOUR_STRAVA_CLIENT_ID}",
       "STRAVA_CLIENT_SECRET": "{YOUR_STRAVA_CLIENT_SECRET}",
-      "STRAVA_CALLBACK_URL": "{STRAVA_CALLBACK_URL}"
+      "STRAVA_CALLBACK_URL": "{STRAVA_CALLBACK_URL}&"
   
     }
   }
@@ -34,14 +49,14 @@ Setup Instructions
 
 4. Click on run and debug extension on the left hand side. Click the run button. This will start an instance of the function app on your localhost. Once the function app is up an running, copy and paste the URL into a web browser and press enter. You should receive a message stating "Validation Failed. Please try again." This confirms that the function is working as expected and all setup tasks were completed properly. Disconnect the function from the localhost.
 
-
-5. Go into the Azure and provision a function app with the following settings.
-  runtime: python 3.11
-  compute: consumption
-  *add more detail here
+Deployment
+1. Using the Azure Function extension, click on deploy to Azure.
+2. Log in to the Azure Portal and retrieve the function app URL.
 
 
-6. Using the Azure extension in VSCode, deploy the Azure function project to the Azure function app. Within the Azure portal take note of the function app URL.
+
+
+5. Under the config file, navigate to the config.ipynb file. Execute the first cell. This will prompt the installation of the kernel package.
 
 
 
